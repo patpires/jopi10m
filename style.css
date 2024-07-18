@@ -39,7 +39,6 @@ body {
 h1 {
     font-size: 2em;
     margin-bottom: 20px;
-    font-family:'Courier New'
 }
 
 p {
@@ -50,8 +49,7 @@ p {
 
 button {
     padding: 20px;
-    font-size: 3em;
-    font-weight: bold;
+    font-size: 1.5em;
     background-color: #FFD700;
     border: none;
     border-radius: 10px;
@@ -93,22 +91,28 @@ button:disabled {
     display: flex;
     justify-content: space-between;
     width: 90%;
-    height: 10vh;
-    max-width: 400px;
+    height: 15vh; /* Aumenta a altura do painel de controle */
+    max-width: 100%;
 }
 
 #control-panel button {
     flex-grow: 1;
+    width: 30vw; /* Cada botão ocupa 30% da largura da tela */
+    height: 100%;
     background-color: red;
     color: white;
     font-weight: bold;
-    height: 100%;
     touch-action: manipulation;
     border: none;
     border-radius: 10px;
     cursor: pointer;
+    font-size: 5vw; /* Ajusta o tamanho da seta proporcional ao botão */
 }
 
 #control-panel button:active {
     background-color: #FFA500;
+}
+
+#control-panel button:focus {
+    outline: none;
 }
