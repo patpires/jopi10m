@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
         endScreen.classList.add('hidden');
         endScreen.style.display = 'none';
         message.textContent = '';
-        statusMessage.textContent = 'Encontre a porção mágica!';
+        statusMessage.textContent = 'Bem-vindo ao jogo! Encontre a porção mágica!';
         playerStatus.textContent = 'Status: Normal';
     }
 
@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 magicPotion.visible = false;
                 magicPotion.falling = false;
                 giantBarrier.visible = true;
-                statusMessage.textContent = 'Você encontrou a porção mágica! Agora passe pela barreira';
+                statusMessage.textContent = 'Você encontrou a porção mágica! Agora pode abrir a porta gigante!';
                 playerStatus.textContent = 'Status: Grande';
             } else if (player.size === 'normal' && currentBackground === 'background2') {
                 player.size = 'small';
@@ -185,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 magicPotion.visible = false;
                 magicPotion.falling = false;
                 tinyBarrier.visible = true;
-                statusMessage.textContent = 'Você encontrou a porção mágica! Agora passe pela barreira!';
+                statusMessage.textContent = 'Você encontrou a porção mágica! Agora pode passar pelo túnel minúsculo!';
                 playerStatus.textContent = 'Status: Pequeno';
             }
         }
@@ -240,9 +240,9 @@ document.addEventListener('DOMContentLoaded', () => {
             currentBackground = 'background3';
             setTimeout(() => {
                 treasureChest.visible = true;
-                statusMessage.textContent = 'Você está bem!';
-                playerStatus.textContent = 'Status: Vencendo';
-            }, 2000);
+                statusMessage.textContent = 'Você encontrou o tesouro! Parabéns!';
+                playerStatus.textContent = 'Status: Vencedor';
+            }, 3000);
         }
 
         // Colisão com o baú do tesouro
@@ -273,7 +273,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     gameScreen.classList.add('hidden');
                     startScreen.classList.remove('hidden');
                     startButton.disabled = false;
-                    statusMessage.textContent = 'Você foi atingido!';
+                    statusMessage.textContent = 'Você foi atingido por um bloco!';
                 }, 100); // Adicionar um pequeno atraso para exibir a mensagem de derrota
             }
         });
@@ -305,47 +305,52 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function shrinkPlayer() {
-                        const shrinkInterval = setInterval(() => {
-                    if (player.width > 25) {
-                        player.width -= 1;
-                        player.height -= 1;
-                        player.y = canvas.height - player.height;
-                    } else {
-                        clearInterval(shrinkInterval);
-                    }
-                }, 50); // Ajustar para diminuir mais lentamente
-                }
+        const shrinkInterval = setInterval(() => {
+            if (player.width > 25) {
+                player.width -= 1;
+                player.height -= 1;
+                player.y = canvas.height - player.height;
+            } else {
+                clearInterval(shrinkInterval);
+            }
+        }, 50); // Ajustar para diminuir mais lentamente
+    }
 
-                startButton.addEventListener('click', startGame);
-                restartButton.addEventListener('click', restartGame);
+    startButton.addEventListener('click', startGame);
+    restartButton.addEventListener('click', restartGame);
 
-                // Função para mover o jogador
-                function movePlayer(direction) {
-                if (!gameStarted || gameOver) return;
+    // Função para mover o jogador
+    function movePlayer(direction) {
+        if (!gameStarted || gameOver) return;
 
-                const moveDistance = 20; // Ajuste a quantidade de pixels que o jogador se move
+        const moveDistance = 20; // Ajuste a quantidade de pixels que o jogador se move
 
-                if (direction === 'ArrowLeft' && player.x > 0) {
-                    player.x -= moveDistance;
-                } else if (direction === 'ArrowRight') {
-                    player.x += moveDistance;
-                    if (player.x > canvas.width) {
-                        player.x = 0; // Reaparecer no lado esquerdo
-                    }
-                }
-                }
+        if (direction === 'ArrowLeft' && player.x > 0) {
+            player.x -= moveDistance;
+        } else if (direction === 'ArrowRight') {
+            player.x += moveDistance;
+            if (player.x > canvas.width) {
+                player.x = 0; // Reaparecer no lado esquerdo
+            }
+        }
+    }
 
-                // Adicionar evento para as setas do teclado
-                document.addEventListener('keydown', (e) => {
-                movePlayer(e.key);
-                });
+    // Adicionar evento para as setas do teclado
+    document.addEventListener('keydown', (e) => {
+        movePlayer(e.key);
+    });
 
-                // Adicionar evento para os botões de seta
-                leftButton.addEventListener('click', () => movePlayer('ArrowLeft'));
-                rightButton.addEventListener('click', () => movePlayer('ArrowRight'));
+    // Adicionar evento para os botões de seta
+    leftButton.addEventListener('click', () => movePlayer('ArrowLeft'));
+    rightButton.addEventListener('click', () => movePlayer('ArrowRight'));
 
-                // Função para animar o baú do tesouro
-                function animateTreasure() {
+    // Prevenir comportamento padrão de zoom ao clicar nos botões
+    leftButton.addEventListener('touchstart', (e) => e.preventDefault());
+    rightButton.addEventListener('touchstart', (e) => e.preventDefault());
+
+ 
+            // Função para animar o baú do tesouro
+            function animateTreasure() {
                 treasure.style.position = 'absolute';
                 treasure.style.left = `${treasureChest.x}px`;
                 treasure.style.top = `${treasureChest.y}px`;
@@ -365,10 +370,10 @@ document.addEventListener('DOMContentLoaded', () => {
                         100% { transform: scale(1); }
                     }
                 `, styleSheet.cssRules.length);
-                }
+            }
 
-                setInterval(createFallingBlock, 2000);
+            setInterval(createFallingBlock, 2000);
 
-                // Inicializar o jogo ao carregar a página
-                initializeGame();
-                });
+            // Inicializar o jogo ao carregar a página
+            initializeGame();
+        });
