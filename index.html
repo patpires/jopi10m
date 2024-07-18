@@ -2,35 +2,23 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>Joana - 10 Meses</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joana - 11 Meses</title>
     <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/patpires/Jojo2meses/main/favicon.ico">
     <link rel="stylesheet" href="styles.css">
 </head>
-<body bgcolor="red" >
+<body background="backnatal.png">
     <div id="game-container">
-        <div id="startScreen" class="screen active">
-            <h1 style="color:white">Joana - 10 meses!</h1>
-            <p style="color:white">Pegue a porção mágica para vencer os obstáculos e conseguir chegar ao tesouro!</p>
-            <button id="startButton" style="color:red">Iniciar Jogo</button>
+        <h1 style="font-family: Arial, sans-serif;
+            color: white;">Joana 11 Meses! <br>Luzes!</h1>
+        <canvas id="gameCanvas"></canvas>
+        <div id="input-container">
+            <input type="text" id="wordInput" placeholder="Adivinhe a palavra...">
+            <button id="submitButton" style="font-family: Arial, sans-serif;
+                color: red; font-style: bold;">Enviar</button>
         </div>
-        <div id="gameScreen" class="screen hidden">
-            <div id="status-panel">
-                <p id="status-message" hidden>Bem-vindo ao jogo! Encontre a porção mágica!</p>
-                <p id="player-status" hidden>Status: Normal</p>
-            </div>
-            <div id="game-area">
-                <canvas id="game-canvas"></canvas>
-            </div>
-            <div id="control-panel" >
-                <button id="left-button" style="flex-grow: 1; background-color: white; color: red; font-weight: bold; width: 70px; height: 35px; touch-action: manipulation;">←</button>
-                <button id="right-button" style="flex-grow: 1; background-color: white; color: red; font-weight: bold; width: 70px; height: 35px; touch-action: manipulation;">→</button>
-            </div>
-        </div>
-        <div id="endScreen" class="screen hidden">
-            <p id="message" style="color:white"></p>
-            <button id="restartButton" hidden>Reiniciar Jogo</button>
-        </div>
+        <div id="hint" style="color: white;"></div>
+        <div id="message" style="color: white;"></div>
     </div>
     <script src="script.js"></script>
 </body>
